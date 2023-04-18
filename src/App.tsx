@@ -36,7 +36,7 @@ function App() {
             })}
           />
           {errors?.firstName?.type === "required" && (
-            <p>This field is required</p>
+            <p>First Name cannot be empty</p>
           )}
           <label>Last Name</label>
           <input
@@ -46,7 +46,7 @@ function App() {
             })}
           />
           {errors?.lastName?.type === "required" && (
-            <p>This field is required</p>
+            <p>Last Name cannot be empty</p>
           )}
           <label>Email Address</label>
           <input
@@ -56,7 +56,7 @@ function App() {
             })}
           />
           {errors?.emailAddress?.type === "required" && (
-            <p>This field is required</p>
+            <p>Email cannot be empty</p>
           )}
           {errors?.emailAddress?.type === "pattern" && (
             <p>Looks like this is not an email</p>
@@ -71,7 +71,7 @@ function App() {
             })}
           />
           {errors?.password?.type === "required" && (
-            <p>This field is required</p>
+            <p>Password cannot be empty</p>
           )}
           {errors?.password?.type === "pattern" && (
             <p>
