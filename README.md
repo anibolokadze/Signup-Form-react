@@ -12,5 +12,5 @@ Users should be able to:
 - View the optimal layout for the site depending on their device's screen size
 - See hover states for all interactive elements on the page
 
-🌎 Live site URL: https://form-validation-alpha-six.vercel.app/ <br>
+🌎 Live site URL: https://form-react-seven.vercel.app/ <br>
 👩‍💻 LinkedIn: https://www.linkedin.com/in/ani-bolokadze-34b872252/
