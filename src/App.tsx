@@ -1,25 +1,88 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+
+interface IFormInput {
+  firstName: string;
+  lastName: string;
+  emailAddress: string;
+  password: string;
+}
 
 function App() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormInput>();
+
+  const [isRegistered, setIsRegistered] = useState(false);
+
+  const onSubmit = (data: IFormInput) => {
+    setIsRegistered(true);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {isRegistered ? (
+        <h1>You are registered</h1>
+      ) : (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <label>First Name</label>
+          <input
+            {...register("firstName", {
+              required: true,
+              maxLength: 20,
+              pattern: /^[A-Za-z]+$/i,
+            })}
+          />
+          {errors?.firstName?.type === "required" && (
+            <p>This field is required</p>
+          )}
+          <label>Last Name</label>
+          <input
+            {...register("lastName", {
+              required: true,
+              pattern: /^[A-Za-z]+$/i,
+            })}
+          />
+          {errors?.lastName?.type === "required" && (
+            <p>This field is required</p>
+          )}
+          <label>Email Address</label>
+          <input
+            {...register("emailAddress", {
+              required: true,
+              pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+            })}
+          />
+          {errors?.emailAddress?.type === "required" && (
+            <p>This field is required</p>
+          )}
+          {errors?.emailAddress?.type === "pattern" && (
+            <p>Looks like this is not an email</p>
+          )}
+          <label>Password</label>
+          <input
+            type="password"
+            {...register("password", {
+              required: true,
+              pattern:
+                /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/,
+            })}
+          />
+          {errors?.password?.type === "required" && (
+            <p>This field is required</p>
+          )}
+          {errors?.password?.type === "pattern" && (
+            <p>
+              8 Characters long or longer. At least one lowercase letter, one
+              uppercase letter, one digit, or symbol
+            </p>
+          )}
+          <input type="submit" />
+        </form>
+      )}
+    </>
   );
 }
 
